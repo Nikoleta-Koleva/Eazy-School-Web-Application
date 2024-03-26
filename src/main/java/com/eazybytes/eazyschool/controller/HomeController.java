@@ -7,13 +7,13 @@ import org.springframework.ui.Model;
 /*
 @Controller indicates that a particular class serves the role of a controller
 Understands from the request which contains localhost:8080, localhost:8080/,
-localhost:8080/home in the browser that it needs to redirect to home.html
+localhost:8080/home in the browser that it needs to redirect to index.html
 */
 @Controller
 public class HomeController {
-    @RequestMapping(value={"","/","home"})
+    @RequestMapping(value={"","/","index"})
     public String displayHomePage() {
-        return "home.html";
+        return "index.html";
     }
 
     /*
@@ -23,7 +23,7 @@ public class HomeController {
     /*
     public String displayHomePage(Model model) {
         model.addAttribute("username", "John Doe");
-        return "home.html";
+        return "index.html";
     }
     */
 }
