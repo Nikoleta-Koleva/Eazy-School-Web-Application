@@ -21,8 +21,9 @@ public class EazySchoolApplication {
 		SpringApplication.run(EazySchoolApplication.class, args);
 	}
 
+	/*
 	public int add (int numberA, int numberB) {
 		return numberA + numberB;
 	}
-
+	*/
 }

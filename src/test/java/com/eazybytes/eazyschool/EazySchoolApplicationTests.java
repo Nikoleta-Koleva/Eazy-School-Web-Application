@@ -13,10 +13,12 @@ class EazySchoolApplicationTests {
 	void contextLoads() {
 	}
 
+	/*
 	@Test
 	void twoPlusTwoShouldEqualFour(){
 		EazySchoolApplication calculator = new EazySchoolApplication();
 		assertEquals(4, calculator.add(2,2));
 	}
+	*/
 
 }
