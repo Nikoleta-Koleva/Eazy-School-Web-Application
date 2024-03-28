@@ -4,6 +4,7 @@ import com.eazybytes.eazyschool.model.Holiday;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Arrays;
@@ -16,15 +17,28 @@ public class HolidaysController {
     @GetMapping - fetch data from the back end to the UI
     required = false means boolean festival is not mandatory
     */
+    /*
     @GetMapping("/holidays")
     public String displayHolidays(@RequestParam(required = false) boolean festival,
                                   @RequestParam(required = false) boolean federal, Model model) {
-        /*
+    /*
         if the attribute is true, it will be added to the model
         to test http://localhost:8080/holidays?festival=true&federal=false
-        */
+        /*
         model.addAttribute("festival", festival);
         model.addAttribute("federal", federal);
+    */
+
+    @GetMapping("/holidays/{display}")
+    public String displayHolidays(@PathVariable String display, Model model) {
+        if (null != display && display.equals("all")) {
+            model.addAttribute("festival", true);
+            model.addAttribute("federal", true);
+        } else if (null != display && display.equals("federal")) {
+            model.addAttribute("federal", true);
+        } else if (null != display && display.equals("festival")) {
+            model.addAttribute("festival", true);
+        }
         //Creates 8 holidays
         List<Holiday> holidays = Arrays.asList(
                 new Holiday(" Jan 1 ","New Year's Day", Holiday.Type.FESTIVAL),
