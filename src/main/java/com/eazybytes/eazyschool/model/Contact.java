@@ -1,5 +1,6 @@
 package com.eazybytes.eazyschool.model;
 
+//POJO class
 public class Contact {
     private String name;
     private String mobileNum;

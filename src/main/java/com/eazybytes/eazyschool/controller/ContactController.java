@@ -21,6 +21,10 @@ Request mapping maps a path to a method
 public class ContactController {
     private final ContactService contactService;
 
+    /*
+    Contact service bean into the ContactController bean with the help of autowiring mechanism
+    Accepts the information from the front end using Pojo object
+    */
     @Autowired
     public ContactController(ContactService contactService) {
         this.contactService = contactService;
