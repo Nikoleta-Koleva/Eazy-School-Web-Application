@@ -16,7 +16,6 @@ inside the packages and declare the spring beans/configuration of the web applic
 
 @SpringBootApplication
 public class EazySchoolApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(EazySchoolApplication.class, args);
 	}

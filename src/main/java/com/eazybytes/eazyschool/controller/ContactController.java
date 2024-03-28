@@ -2,10 +2,14 @@ package com.eazybytes.eazyschool.controller;
 
 import com.eazybytes.eazyschool.model.Contact;
 import com.eazybytes.eazyschool.service.ContactService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +25,8 @@ Request mapping maps a path to a method
 public class ContactController {
     private final ContactService contactService;
 
+    private static Logger log = LoggerFactory.getLogger(ContactController.class);
+
     /*
     Contact service bean into the ContactController bean with the help of autowiring mechanism
     Accepts the information from the front end using Pojo object
@@ -31,15 +37,23 @@ public class ContactController {
     }
 
     @RequestMapping("/contact")
-    public String displayContactPage() {
+    public String displayContactPage(Model model) {
+        model.addAttribute("contact", new Contact());
         return "contact.html";
     }
 
     //Business logic related to preliminary checks/validations
-    @RequestMapping(value = "/saveMsg", method = POST)
-    public ModelAndView saveMessage(Contact contact) {
+    @RequestMapping(value = "/saveMsg",method = POST)
+    public String saveMessage(@Valid @ModelAttribute("contact") Contact contact, Errors errors){
+
+        if(errors.hasErrors()){
+            log.error("Contact form validation failed due to : " + errors.toString());
+            //Don't invoke the action, just display the contact.html
+            return "contact.html";
+        }
         contactService.saveMessageDetails(contact);
-        return new ModelAndView("redirect:/contact");
+        //Invoke the action again
+        return "redirect:/contact";
     }
 
     /*
