@@ -1,6 +1,17 @@
 package com.eazybytes.eazyschool.model;
 
-//POJO class
+import lombok.Data;
+
+/*
+LOMBOK - Java library with annotations aimed at avoiding
+writing Java code known to be repetitive and boilerplate
+like getters/setters/constructors.
+Autogenerates the methods during the build process, and
+they are not present in the source code.
+
+POJO class
+*/
+@Data
 public class Holiday {
     private final String day;
     private final String reason;
@@ -9,23 +20,5 @@ public class Holiday {
     //Enum - special Java type defining set of constants
     public enum Type {
         FESTIVAL, FEDERAL
-    }
-
-    public Holiday(String day, String reason, Type type) {
-        this.day = day;
-        this.reason = reason;
-        this.type = type;
-    }
-
-    public String getDay() {
-        return day;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public Type getType() {
-        return type;
     }
 }
