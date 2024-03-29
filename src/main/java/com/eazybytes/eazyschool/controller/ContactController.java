@@ -45,13 +45,15 @@ public class ContactController {
     //Business logic related to preliminary checks/validations
     @RequestMapping(value = "/saveMsg",method = POST)
     public String saveMessage(@Valid @ModelAttribute("contact") Contact contact, Errors errors){
-
         if(errors.hasErrors()){
             log.error("Contact form validation failed due to : " + errors.toString());
             //Don't invoke the action, just display the contact.html
             return "contact.html";
         }
         contactService.saveMessageDetails(contact);
+        contactService.setCounter(contactService.getCounter()+1);
+        log.info("Number of times the Contact form is submitted : "+ contactService.getCounter());
+
         //Invoke the action again
         return "redirect:/contact";
     }
